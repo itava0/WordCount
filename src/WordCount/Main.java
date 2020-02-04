@@ -12,5 +12,20 @@ public class Main {
 
         // Create a HashMap
         HashMap<String, Integer> wordsHashMap = new HashMap<String, Integer>();
+
+        // Loop through the HashMap of words
+        for (String word : words) {
+            // if the HashMap contains the matching key
+            if (wordsHashMap.containsKey(word)) {
+                // set hashCount to keys existing count
+                int hashCount = wordsHashMap.get(word);
+                // and replace the existing key and add one to hashcount
+                wordsHashMap.put(word, hashCount + 1);
+            } else {
+                // if the word isn't a duplicate add to the HashMap and set to 1
+                wordsHashMap.put(word, 1);
+            }
+
+        }
     }
 }
