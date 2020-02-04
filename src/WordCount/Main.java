@@ -1,5 +1,8 @@
 package src.WordCount;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 
 public class Main {
@@ -26,6 +29,33 @@ public class Main {
                 wordsHashMap.put(word, 1);
             }
 
+            // Set HashMap to ArrayList
+            ArrayList<HashMap.Entry<String, Integer>> sortedMap = new ArrayList<HashMap.Entry<String, Integer>>();
+            sortedMap.addAll(wordsHashMap.entrySet());
+
+            // sort through collection by value (count of duplicates by key)
+            Collections.sort(sortedMap, new Comparator<HashMap.Entry<String, Integer>>() {
+                public int compare(HashMap.Entry<String, Integer> o1, HashMap.Entry<String, Integer> o2) {
+                    return o2.getValue() - o1.getValue();
+                }
+            });
+
+            ArrayList<HashMap.Entry<String, Integer>> stretchMap = new ArrayList<HashMap.Entry<String, Integer>>();
+            int count = 0;
+            for (HashMap.Entry<String, Integer> w : sortedMap) {
+                if (count <= 49) {
+                    System.out.println("key: " + w.getKey() + ", value: " + w.getValue());
+                    count++;
+                    stretchMap.add(w);
+                }
+
+            }
+            System.out.println();
+            System.out.println("*** Stretch assignment ***");
+            stretchMap.sort((a, b) -> a.getKey().compareToIgnoreCase(b.getKey()));
+            for (HashMap.Entry<String, Integer> w : stretchMap) {
+                System.out.println("key: " + w.getKey() + ", value: " + w.getValue());
+            }
         }
     }
 }
